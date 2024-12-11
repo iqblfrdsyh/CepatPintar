@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  color: #000000;
+  background-color: #FAFAFA;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.gradient-text {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to right, #FFA034 30%, #F1DD22 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* typing animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* blink caret animation */
+@keyframes blinkCaret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: black;
+  }
+}
+
+/* .typing-effect {
+  white-space: nowrap;
+  border-right: 2px solid;
+  animation: typing 3s steps(30, end), blinkCaret 0.75s step-end infinite;
+} */
