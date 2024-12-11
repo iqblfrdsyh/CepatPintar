@@ -34,7 +34,7 @@ export function Providers({ children }) {
       <NextUIProvider>
         {isSplashVisible && <SplashScreen />}
 
-        {!(pathname == "/signin") && <NavigationBar />}
+        {!isSplashVisible && !(pathname == "/signin") && <NavigationBar />}
 
         <main
           className={` ${!(pathname == "/signin") && "xl:w-[1440px] mx-auto"} `}
