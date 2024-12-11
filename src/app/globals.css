@@ -4,15 +4,27 @@
 
 body {
   color: #000000;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   overflow: hidden;
   height: 100vh;
+}
+
+header {
+  max-width: 100% !important;
 }
 
 .gradient-text {
   position: relative;
   display: inline-block;
-  background: linear-gradient(to right, #FFA034 30%, #F1DD22 100%);
+  background: linear-gradient(to right, #ffa034 30%, #f1dd22 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.gradient-text-logo {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(to right,#ffa034 30%, #f1dd22 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

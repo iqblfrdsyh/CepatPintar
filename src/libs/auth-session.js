@@ -1,25 +1,25 @@
-import axios from "axios";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
+import { useSession } from "next-auth/react";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
-export const authUserSession = async () => {
-  try {
-    // Mendapatkan session menggunakan getServerSession
-    // const session = await getServerSession(authOptions);
+export const authUserSession = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const pathname = usePathname();
 
-    // Mengirim session ke client melalui API
-    // if (session) {
-    // Menggunakan axios untuk mengirim session ke client
-    const response = await axios.get("/api/auth/session");
-    console.log(response.data.user);
-    
-    // } else {
-    //   console.log('No session found');
-    // }
+  useEffect(() => {
+    if (status === "authenticated") {
+      if (pathname === "/signin") {
+        router.replace("/");
+      } else if (pathname === "/") {
+        router.replace("/");
+      }
+    } else {
+      if (pathname !== "/signin") {
+        router.replace("/signin");
+      }
+    }
+  }, [status, router, pathname]);
 
-    return response.data.user;
-  } catch (error) {
-    console.error("Error dalam mendapatkan session:", error);
-    return null;
-  }
+  return { session, status };
 };

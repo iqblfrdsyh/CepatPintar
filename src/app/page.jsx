@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import BoxQuestion from "@/components/boxQuestion";
 import ContainerAnswer from "@/components/containerAnswer";
 import InputQuestion from "@/components/inputQuestion";
@@ -8,7 +8,7 @@ import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { motion } from "framer-motion";
 import LoadingBolt from "@/components/loadingIcon";
 import { runAI } from "@/libs/api-libs";
-import useAIModel from "@/store/useModelAI";
+import useAIModel from "@/hooks/useModelAI";
 import { authUserSession } from "@/libs/auth-session";
 
 const Home = () => {
@@ -18,20 +18,10 @@ const Home = () => {
   const scrollRef = useRef(null);
   const inputContent = useRef(null);
   const latestQuestionRef = useRef(null);
-  const [user, setUser] = useState(null);
 
   const AIModel = useAIModel((state) => state.AIModel);
+  const { session } = authUserSession();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const userSession = await authUserSession();
-      setUser(userSession);
-    };
-    
-    fetchUser();
-  }, []);
-  
-  // console.log({ user });
   const handleClick = async () => {
     const question = inputContent.current.value.trim();
 
@@ -122,6 +112,22 @@ const Home = () => {
       </div>
     ));
 
+  // const fullName = session?.user.name;
+
+  // const nameParts = fullName?.split(" ");
+
+  // let shortName = "";
+
+  // function capitalize(str) {
+  //   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  // }
+
+  // if (nameParts?.length === 1) {
+  //   shortName = capitalize(nameParts[0]);
+  // } else if (nameParts?.length > 1) {
+  //   shortName = `${capitalize(nameParts[0][0])}. ${capitalize(nameParts[1])}`;
+  // }
+
   const renderContent = () => {
     return (
       <>
@@ -132,7 +138,7 @@ const Home = () => {
           className="text-center mt-7"
         >
           <h2 className="gradient-text text-[45px] font-semibold">
-            Hello {user?.name}
+            Hello {session?.user.name}
           </h2>
           <p className="text-[20px] font-semibold opacity-50 tracking-[1px]">
             Mau belajar apa hari ini?
