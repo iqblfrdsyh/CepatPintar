@@ -16,7 +16,7 @@ const Signin = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className="flex justify-center flex-col gap-5 -mt-8">
+      <div className="flex justify-center flex-col gap-5 -mt-12">
         <h2 className="text-[30px] font-bold tracking-[1px]">
           Login <span className="gradient-text">CepatPintar</span>
         </h2>

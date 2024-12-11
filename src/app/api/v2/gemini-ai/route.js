@@ -8,8 +8,22 @@ async function requestGeminiAI(model, prompt, history) {
   const chat = gemini.startChat({
     history: [
       ...history,
-      { role: "user", parts: [{ text: "Jika saya menanyakan diluar materi pembelajaran smk / sma / universitas, maka kamu jawab 'silakan bahas materi pembelajaran.', kamu tidak boleh menjawab selain materi pembelajaran" }] },
-      { role: "model", parts: [{ text: "baik, saya akan melakukan nya, saya di rancang khusus untuk pertanyaan materi pembelajaran smk/sma/universitas" }] },
+      {
+        role: "user",
+        parts: [
+          {
+            text: "You are a helpful AI assistant specialized in answering questions related to educational content, specifically for SMK, SMA, and University subjects. Please focus only on these topics and avoid providing information outside of this scope. no game, no out of topic \n\nYou can help with subjects like Math, Science, Programming, and more at various educational levels including SMK, SMA, and University. Answer questions with this context in mind. \n\nif text indonesia answer with indonesia language, if not answer with english.",
+          },
+        ],
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "I am an AI assistant designed to help answer questions related to educational content, specifically for SMK, SMA, and University subjects. I will only discuss topics within these areas and will not provide information outside of this scope. \n\nI can assist with subjects like Mathematics, Science, Programming, and others at various educational levels, including SMK, SMA, and University. Please ask questions within this context. \n\nIf you ask in Indonesian, I will respond in Indonesian. If not, I will respond in English.",
+          },
+        ],
+      },
     ],
   });
 

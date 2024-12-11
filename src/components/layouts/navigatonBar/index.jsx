@@ -61,7 +61,7 @@ const NavigationBar = () => {
 
   return (
     <>
-      <Navbar className="sm:py-3 sm:px-7 flex justify-between items-center fixed top-0 w-screen bg-transparent opacity-100 z-50">
+      <Navbar className="sm:py-2 sm:px-7 flex justify-between items-center fixed top-0 w-screen bg-transparent opacity-100 z-50">
         <NavbarBrand className="absolute sm:static">
           <Link href="/" className="flex items-center">
             <Image src="/images/logo.svg" alt="logo" width={30} height={30} />

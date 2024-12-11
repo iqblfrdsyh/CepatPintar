@@ -20,11 +20,8 @@ const ModalSelect = ({ isOpen, onClose, children }) => {
               </ModalHeader>
               <ModalBody>{children}</ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button color="danger" variant="solid" radius="sm" onPress={onClose}>
                   Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
                 </Button>
               </ModalFooter>
             </>
