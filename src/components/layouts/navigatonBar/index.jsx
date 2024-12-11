@@ -62,13 +62,13 @@ const NavigationBar = () => {
   return (
     <>
       <Navbar className="sm:py-3 sm:px-7 flex justify-between items-center fixed top-0 w-screen bg-transparent opacity-100 z-50">
-        <NavbarBrand>
+        <NavbarBrand className="absolute sm:static">
           <Link href="/" className="flex items-center">
-            <figure>
-              <Image src="/images/logo.svg" alt="logo" width={30} height={30} />
-            </figure>
+            <Image src="/images/logo.svg" alt="logo" width={30} height={30} />
             <div className="flex gap-1 ml-2">
-              <h1 className="text-[22px] font-semibold">CepatPintar</h1>
+              <h1 className="text-[24px] font-semibold gradient-text-logo">
+                CepatPintar
+              </h1>
               <span className="text-[11px] text-right font-semibold text-gray-400">
                 v1.0.0
               </span>

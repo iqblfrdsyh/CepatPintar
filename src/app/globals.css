@@ -12,7 +12,6 @@ body {
 header {
   max-width: 100% !important;
 }
-
 .gradient-text {
   position: relative;
   display: inline-block;
@@ -24,8 +23,9 @@ header {
 .gradient-text-logo {
   position: relative;
   display: inline-block;
-  background: linear-gradient(to right,#ffa034 30%, #f1dd22 100%);
+  background: linear-gradient(to right, #f1dd22 3%, #ffa034 62%);
   -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
