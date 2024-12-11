@@ -7,6 +7,10 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 export const metadata = {
   title: "Cepat Pintar",
   description: "Belajar dengan AI menjadi cepat pintar!",
+  verification: {
+    google:
+      "google-site-verification=Q1Vj2CtXalavovn1xbHCFyjcjjLTqFjpawKtlHR5eHM",
+  },
   keywords: "CepatPintar",
   icons: {
     icon: ["/images/logo.svg"],
