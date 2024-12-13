@@ -143,7 +143,7 @@ const NavigationBar = ({ onChange, darkmode }) => {
             <SelectItem
               key={model.id}
               value={model.name}
-              className="text-black w-[250px]"
+              className="text-black w-[250px] dark:text-white"
             >
               {model.name}
             </SelectItem>
