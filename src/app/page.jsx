@@ -48,6 +48,7 @@ const Home = () => {
     const question = inputContent.current.value.trim();
 
     if (!question) return;
+    setShowAlert(false);
 
     inputContent.current.value = "";
 
@@ -159,7 +160,7 @@ const Home = () => {
       </>
     );
   };
-  console.log(showAlert);
+  // console.log(showAlert);
 
   return (
     <section className="relative pt-[65px]">
