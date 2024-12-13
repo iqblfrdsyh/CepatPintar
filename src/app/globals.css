@@ -30,9 +30,8 @@ header {
   color: transparent;
 }
 
-.motionDiv {
-  top: 3.5rem;
-  transform: translate(-50%, -50%) !important;
+.alert-close-button {
+  pointer-events: auto;  /* Pastikan elemen dapat menerima klik atau sentuhan */
 }
 
 /* typing animation */

@@ -159,29 +159,19 @@ const Home = () => {
       </>
     );
   };
+  console.log(showAlert);
 
   return (
     <section className="relative pt-[65px]">
-      <motion.div
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        exit={{ y: -100 }}
-        transition={{
-          type: "spring",
-          stiffness: 50,
-          damping: 8,
-          duration: 1,
-        }}
-        className="w-[350px] sm:w-[430px] absolute left-1/2 motionDiv z-50"
-      >
+      <div className="w-[350px] sm:w-[430px] fixed top-8 left-1/2 transform -translate-x-1/2 z-50">
         <Alert
           variant="solid"
           color={"danger"}
-          isVisible={true}
+          isVisible={showAlert}
           title={`Anda Sudah lama tidak belajar selama ${studyTime.day} Hari ${studyTime.hour} Jam, ayo belajar!`}
-          onClose={() => setShowAlert(false)}
+          onClick={() => setShowAlert(false)}
         />
-      </motion.div>
+      </div>
 
       {history.length > 0 ? (
         <ScrollShadow
