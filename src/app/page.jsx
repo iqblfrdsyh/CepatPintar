@@ -89,7 +89,7 @@ const Home = () => {
         throw new Error("No data found");
       }
     } catch (error) {
-      newEntry.answer = `${error.message}, Please type again.`;
+      newEntry.answer = `Network error, Please type again.`;
       newEntry.loading = false;
       setHistory((prevHistory) => {
         const updatedHistory = [...prevHistory];
