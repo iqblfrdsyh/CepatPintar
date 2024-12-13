@@ -52,7 +52,6 @@ export const authOptions = {
         last_study: token.last_study,
         login_type: token.login_type,
       };
-      // checkLastStudy(session);
       return session;
     },
   },

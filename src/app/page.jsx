@@ -162,15 +162,27 @@ const Home = () => {
 
   return (
     <section className="relative pt-[65px]">
-      <div className="absolute z-50 w-[350px] sm:w-[430px] top-8 left-1/2 transform -translate-x-1/2">
+      <motion.div
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        exit={{ y: -100 }}
+        transition={{
+          type: "spring",
+          stiffness: 50,
+          damping: 8,
+          duration: 1,
+        }}
+        className="w-[350px] sm:w-[430px] absolute left-1/2 motionDiv"
+      >
         <Alert
+          variant="solid"
           color={"danger"}
           isVisible={showAlert}
           title={`Anda Sudah lama tidak belajar selama ${studyTime.day} Hari ${studyTime.hour} Jam, ayo belajar!`}
-          className="shadow-lg"
           onClose={() => setShowAlert(false)}
         />
-      </div>
+      </motion.div>
+
       {history.length > 0 ? (
         <ScrollShadow
           ref={scrollRef}
