@@ -16,13 +16,13 @@ const Signin = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className="flex justify-center flex-col gap-5 -mt-12">
-        <h2 className="text-[30px] font-bold tracking-[1px]">
+      <div className="flex justify-center flex-col gap-5 sm:-mt-0 -mt-12 bg-white rounded-lg sm:p-14 p-10 m-5 shadow-md">
+        <h2 className="text-[30px] font-bold tracking-[1px] text-center">
           Login <span className="gradient-text">CepatPintar</span>
         </h2>
         <Button
           onClick={() => signIn("google", { callbackUrl: "/", redirect: true })}
-          className="flex items-center justify-center gap-3 w-full bg-white hover:bg-gray-50 text-[#757575] font-medium border border-gray-200 h-[45px] shadow-[0_2px_4px_0.1px_rgba(0,0,0,0.17)] hover:shadow-[0_0px_3px_0.1px_rgba(0,0,0,0.25)] rounded-md"
+          className="flex items-center justify-center gap-3 w-full bg-transparent hover:bg-gray-100 text-[#757575] font-medium border-2 border-gray-400 h-[45px]  rounded-full"
         >
           <Image
             src="/images/icons/google-icon.svg"
