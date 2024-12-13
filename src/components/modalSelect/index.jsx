@@ -15,12 +15,17 @@ const ModalSelect = ({ isOpen, onClose, children }) => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 dark:text-white">
                 Select AI Model
               </ModalHeader>
-              <ModalBody>{children}</ModalBody>
+              <ModalBody className="dark:text-white">{children}</ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="solid" radius="sm" onPress={onClose}>
+                <Button
+                  color="danger"
+                  variant="solid"
+                  radius="sm"
+                  onPress={onClose}
+                >
                   Close
                 </Button>
               </ModalFooter>
