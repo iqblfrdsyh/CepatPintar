@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  color: #000000;
-  background-color: #fafafa;
-  overflow: hidden;
-  height: 100vh;
-}
-
 header {
   max-width: 100% !important;
 }
@@ -31,7 +24,7 @@ header {
 }
 
 .alert-close-button {
-  pointer-events: auto;  /* Pastikan elemen dapat menerima klik atau sentuhan */
+  pointer-events: auto; /* Pastikan elemen dapat menerima klik atau sentuhan */
 }
 
 /* typing animation */

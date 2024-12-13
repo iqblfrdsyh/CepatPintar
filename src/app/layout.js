@@ -21,7 +21,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body
+        className={`${montserrat.className} overflow-hidden h-screen bg-[#fafafa] text-[#000000] dark:bg-[#181C14]`}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

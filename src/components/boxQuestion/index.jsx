@@ -40,9 +40,9 @@ const BoxQuestion = ({ onQuestionClick }) => {
             whileTap={{ scale: 0.95 }}
             onClick={() => handleQuestionClick(data.question)}
           >
-            <Card className="bg-[#00000083] rounded-md cursor-pointer w-[150px] h-[130px] sm:w-[250px] hover:bg-[#00000043]">
+            <Card className="bg-[#ffa03449] rounded-md cursor-pointer w-[150px] h-[130px] sm:w-[250px] hover:bg-[#ffa0342f] shadow-none">
               <CardBody className="flex justify-center items-center">
-                <p className="text-[13px] text-white text-center">
+                <p className="text-[14px] text-black dark:text-white text-center font-medium">
                   {data.question}
                 </p>
               </CardBody>

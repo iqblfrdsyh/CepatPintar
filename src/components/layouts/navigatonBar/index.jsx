@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { AImodels } from "@/data/data.AI-model";
 import {
@@ -9,6 +9,7 @@ import {
   Dropdown,
   DropdownItem,
   DropdownMenu,
+  DropdownSection,
   DropdownTrigger,
   Image,
   Navbar,
@@ -16,6 +17,7 @@ import {
   NavbarContent,
   Select,
   SelectItem,
+  Switch,
   useDisclosure,
 } from "@nextui-org/react";
 import useAIModel from "@/hooks/useModelAI";
@@ -24,7 +26,7 @@ import { signOut } from "next-auth/react";
 import Swal from "sweetalert2";
 import ModalSelect from "@/components/modalSelect";
 
-const NavigationBar = () => {
+const NavigationBar = ({ onChange, darkmode }) => {
   const switchAIModel = useAIModel((state) => state.switchAIModel);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -77,29 +79,48 @@ const NavigationBar = () => {
           </Link>
         </NavbarBrand>
         <NavbarContent as="div" justify="end">
-          <Dropdown placement="bottom-end">
+          <Dropdown placement="bottom-end" className="dark:text-white">
             <DropdownTrigger>
               <Avatar
                 isBordered
                 as="button"
                 className="transition-transform"
-                color="secondary"
+                color="success"
                 name={session?.user.name.trim().split(" ")[0][0].toUpperCase()}
                 size="sm"
                 src={session?.user.image}
               />
             </DropdownTrigger>
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2">
-                <p className="font-semibold">Signed in as</p>
-                <p className="font-semibold truncate w-40">
-                  {session?.user.email}
-                </p>
-              </DropdownItem>
-              <DropdownItem key="settings" onClick={handleOpen}>
-                Select Model
-              </DropdownItem>
 
+            <DropdownMenu aria-label="Profile Actions" variant="flat">
+              <DropdownSection showDivider aria-label="Preferences">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold truncate w-40">
+                    {session?.user.email}
+                  </p>
+                </DropdownItem>
+                <DropdownItem key="model" onClick={handleOpen}>
+                  Select Model
+                </DropdownItem>
+                <DropdownItem
+                  key="theme"
+                  isReadOnly
+                  className="cursor-default"
+                  endContent={
+                    <select
+                      className="z-10 outline-none w-20 py-0.5 rounded-md text-tiny group-data-[hover=true]:border-default-500 border-small border-default-300 dark:border-default-200 bg-transparent text-default-500"
+                      value={darkmode ? "dark" : "light"}
+                      onChange={onChange}
+                    >
+                      <option value="dark">Dark</option>
+                      <option value="light">Light</option>
+                    </select>
+                  }
+                >
+                  Theme
+                </DropdownItem>
+              </DropdownSection>
               <DropdownItem key="logout" color="danger" onClick={handleLogout}>
                 Log Out
               </DropdownItem>

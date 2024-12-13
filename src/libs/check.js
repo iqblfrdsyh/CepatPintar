@@ -1,7 +1,7 @@
 export async function checkLastStudy(session) {
   try {
     if (session) {
-      const lastStudyTimestamp = new Date(session.user.last_study);
+      const lastStudyTimestamp = new Date("2024-12-01T15:57:15.547Z");
 
       if (lastStudyTimestamp) {
         const now = new Date();
@@ -9,7 +9,10 @@ export async function checkLastStudy(session) {
         const diffInMs = now - lastStudyTimestamp;
 
         const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-        const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+
+        const diffInHours = Math.floor(
+          (diffInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
 
         const diffInMinutes = Math.floor(
           (diffInMs % (1000 * 60 * 60)) / (1000 * 60)

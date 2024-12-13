@@ -6,8 +6,8 @@ const InputQuestion = forwardRef(({ onClick, onKeyDown, isSubmitted }, ref) => {
       <div className="relative w-full">
         <input
           type="text"
-          placeholder="Type question here"
-          className="w-full px-5 py-3 pr-12 text-white rounded-full bg-[#00000097] outline-none border-none"
+          placeholder="Ketikan sesuatu...."
+          className="w-full px-5 py-3 pr-12 text-white rounded-full bg-[#00000097] dark:bg-[#ffffff54]  outline-none border-none dark:placeholder:text-white"
           id="inputContent"
           onKeyDown={onKeyDown}
           ref={ref}

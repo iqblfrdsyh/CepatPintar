@@ -125,8 +125,8 @@ const Home = () => {
           className="flex justify-end"
           ref={index === history.length - 1 ? latestQuestionRef : null}
         >
-          <div className="mb-2 bg-[#FFFFFF4D] py-2 px-3 rounded-b-xl rounded-tl-xl text-right inline-block min-w-[fit-content]">
-            <h4>{entry.question}</h4>
+          <div className="mb-2 bg-[#00000068] dark:bg-[#ffffff4d] py-2 px-3 rounded-b-xl rounded-tl-xl text-right inline-block min-w-[fit-content]">
+            <h3 className="text-white">{entry.question}</h3>
           </div>
         </div>
         {entry.loading ? (
@@ -149,7 +149,7 @@ const Home = () => {
           <h2 className="gradient-text text-[45px] font-semibold">
             Hello {session?.user.name}
           </h2>
-          <p className="text-[20px] font-semibold opacity-50 tracking-[1px]">
+          <p className="text-[20px] font-semibold opacity-50 tracking-[1px] dark:text-white">
             Mau belajar apa hari ini?
           </p>
         </motion.div>
@@ -179,7 +179,7 @@ const Home = () => {
           ref={scrollRef}
           size={20}
           hideScrollBar
-          className="w-[93%] mt-[5px] h-[72vh] mx-auto sm:w-[70%] sm:h-[78vh] sm:mt-[20px] relative"
+          className="w-[93%] mt-[5px] h-[72vh] mx-auto sm:w-[70%] sm:h-[78vh] sm:mt-[20px] relative dark:text-[#fafafa]"
         >
           {renderHistory()}
         </ScrollShadow>
