@@ -44,3 +44,28 @@ export async function loginWithGoogle(data, callback) {
     callback({ status: false, error: error.message });
   }
 }
+
+export async function updateLastStudyById(id, callback) {
+  try {
+    const userRef = doc(firestore, "users", id);
+
+    if (id) {
+      const updatedData = {
+        last_study: new Date().toISOString(),
+      };
+
+      await updateDoc(userRef, updatedData);
+
+      callback({
+        status: true,
+        message: "Last study updated successfully",
+        last_study: updatedData.last_study,
+      });
+    } else {
+      callback({ status: false, message: "No user found with this ID" });
+    }
+  } catch (error) {
+    console.error("Error in updateLastStudyById:", error);
+    callback({ status: false, error: error.message });
+  }
+}

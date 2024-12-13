@@ -27,3 +27,12 @@ export async function runAI(aiModel, question, history) {
     console.log(error.message);
   }
 }
+
+export async function updateData(endpoint, userId) {
+  try {
+    const response = await axios.get(`${base_url}/${endpoint}/${userId}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}

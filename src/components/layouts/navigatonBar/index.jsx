@@ -51,6 +51,7 @@ const NavigationBar = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         signOut();
+        localStorage.removeItem("alertShown");
       }
     });
   };

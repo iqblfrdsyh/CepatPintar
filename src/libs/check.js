@@ -1,26 +1,24 @@
-import { getFirestore } from "firebase/firestore";
-import app from "./firebase/init";
-
-const firestore = getFirestore(app);
-
-export async function checkLastStudy(userId) {
+export async function checkLastStudy(session) {
   try {
-    const userRef = doc(firestore, "users", userId);
-    const snapshot = await getDoc(userRef);
-
-    if (snapshot.exists()) {
-      const lastStudyTimestamp = snapshot.data().last_study;
+    if (session) {
+      const lastStudyTimestamp = new Date(session.user.last_study);
 
       if (lastStudyTimestamp) {
-        const lastStudyDate = lastStudyTimestamp.toDate();
         const now = new Date();
 
-        const diffInMs = now - lastStudyDate;
+        const diffInMs = now - lastStudyTimestamp;
 
         const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+        const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
 
-        console.log(`User sudah tidak mengakses selama ${diffInDays} hari.`);
-        return diffInDays;
+        const diffInMinutes = Math.floor(
+          (diffInMs % (1000 * 60 * 60)) / (1000 * 60)
+        );
+
+        console.log(
+          `User sudah tidak mengakses selama ${diffInDays} hari ${diffInHours} jam ${diffInMinutes} menit.`
+        );
+        return { diffInDays, diffInHours };
       } else {
         console.log("User belum memiliki data last_study.");
         return null;

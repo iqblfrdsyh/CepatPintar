@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import BoxQuestion from "@/components/boxQuestion";
 import ContainerAnswer from "@/components/containerAnswer";
 import InputQuestion from "@/components/inputQuestion";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { motion } from "framer-motion";
 import LoadingBolt from "@/components/loadingIcon";
-import { runAI } from "@/libs/api-libs";
+import { runAI, updateData } from "@/libs/api-libs";
 import useAIModel from "@/hooks/useModelAI";
 import { authUserSession } from "@/libs/auth-session";
+import { checkLastStudy } from "@/libs/check";
+import { Alert } from "@nextui-org/react";
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -18,9 +20,29 @@ const Home = () => {
   const scrollRef = useRef(null);
   const inputContent = useRef(null);
   const latestQuestionRef = useRef(null);
+  const [studyTime, setStudyTime] = useState({ day: 0, hour: 0 });
+  const [showAlert, setShowAlert] = useState(false);
 
   const AIModel = useAIModel((state) => state.AIModel);
   const { session } = authUserSession();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await checkLastStudy(session);
+      if (result) {
+        const { diffInDays, diffInHours } = result;
+        setStudyTime({ day: diffInDays || 0, hour: diffInHours || 0 });
+
+        const alertShown = localStorage.getItem("alertShown");
+        if (diffInDays >= 1 && diffInHours > 15 && !alertShown) {
+          setShowAlert(true);
+          localStorage.setItem("alertShown", "true");
+        }
+      }
+    };
+
+    fetchData();
+  }, [session]);
 
   const handleClick = async () => {
     const question = inputContent.current.value.trim();
@@ -43,7 +65,9 @@ const Home = () => {
 
       const { choices } = response.data.body;
 
-      console.log(response);
+      if (response) {
+        await updateData("user", session?.user.id);
+      }
       if (choices && choices.length > 0) {
         const answer = choices[0].message.content;
         newEntry.answer = answer;
@@ -112,22 +136,6 @@ const Home = () => {
       </div>
     ));
 
-  // const fullName = session?.user.name;
-
-  // const nameParts = fullName?.split(" ");
-
-  // let shortName = "";
-
-  // function capitalize(str) {
-  //   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-  // }
-
-  // if (nameParts?.length === 1) {
-  //   shortName = capitalize(nameParts[0]);
-  // } else if (nameParts?.length > 1) {
-  //   shortName = `${capitalize(nameParts[0][0])}. ${capitalize(nameParts[1])}`;
-  // }
-
   const renderContent = () => {
     return (
       <>
@@ -154,6 +162,15 @@ const Home = () => {
 
   return (
     <section className="relative pt-[65px]">
+      <div className="absolute z-50 w-[350px] sm:w-[430px] top-8 left-1/2 transform -translate-x-1/2">
+        <Alert
+          color={"danger"}
+          isVisible={showAlert}
+          title={`Anda Sudah lama tidak belajar selama ${studyTime.day} Hari ${studyTime.hour} Jam, ayo belajar!`}
+          className="shadow-lg"
+          onClose={() => setShowAlert(false)}
+        />
+      </div>
       {history.length > 0 ? (
         <ScrollShadow
           ref={scrollRef}

@@ -1,3 +1,4 @@
+import { checkLastStudy } from "@/libs/check";
 import { loginWithGoogle } from "@/libs/firebase/service";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
@@ -28,6 +29,7 @@ export const authOptions = {
 
         await loginWithGoogle(data, (result) => {
           if (result.status) {
+            token.id = result.data.id;
             token.fullname = result.data.fullname;
             token.name = result.data.name;
             token.email = result.data.email;
@@ -42,6 +44,7 @@ export const authOptions = {
 
     async session({ session, token }) {
       session.user = {
+        id: token.id,
         fullname: token.fullname,
         name: token.name,
         email: token.email,
@@ -49,6 +52,7 @@ export const authOptions = {
         last_study: token.last_study,
         login_type: token.login_type,
       };
+      // checkLastStudy(session);
       return session;
     },
   },

@@ -17,6 +17,7 @@ module.exports = {
         xl: "1440px",
         "2xl": "1536px",
       },
+      
     },
   },
   darkMode: "class",
