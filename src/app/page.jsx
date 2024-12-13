@@ -172,12 +172,12 @@ const Home = () => {
           damping: 8,
           duration: 1,
         }}
-        className="w-[350px] sm:w-[430px] absolute left-1/2 motionDiv"
+        className="w-[350px] sm:w-[430px] absolute left-1/2 motionDiv z-50"
       >
         <Alert
           variant="solid"
           color={"danger"}
-          isVisible={showAlert}
+          isVisible={true}
           title={`Anda Sudah lama tidak belajar selama ${studyTime.day} Hari ${studyTime.hour} Jam, ayo belajar!`}
           onClose={() => setShowAlert(false)}
         />
