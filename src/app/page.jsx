@@ -31,10 +31,12 @@ const Home = () => {
       const result = await checkLastStudy(session);
       if (result) {
         const { diffInDays, diffInHours } = result;
+
         setStudyTime({ day: diffInDays || 0, hour: diffInHours || 0 });
 
         const alertShown = localStorage.getItem("alertShown");
-        if (diffInDays >= 1 && diffInHours > 15 && !alertShown) {
+
+        if (diffInDays >= 1 && !alertShown) {
           setShowAlert(true);
           localStorage.setItem("alertShown", "true");
         }
