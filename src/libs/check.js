@@ -1,7 +1,7 @@
 export async function checkLastStudy(session) {
   try {
     if (session) {
-      const lastStudyTimestamp = new Date("2024-12-01T15:57:15.547Z");
+      const lastStudyTimestamp = new Date(session.user.last_study);
 
       if (lastStudyTimestamp) {
         const now = new Date();
