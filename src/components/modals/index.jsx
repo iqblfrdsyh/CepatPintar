@@ -40,7 +40,7 @@ const Modals = {
   ModalLeaderboard: ({ isOpen, onClose, children }) => {
     return (
       <div>
-        <Modal isOpen={isOpen} size={"3xl"} onClose={onClose}>
+        <Modal isOpen={isOpen} size={"2xl"} onClose={onClose}>
           <ModalContent>
             {(onClose) => (
               <>

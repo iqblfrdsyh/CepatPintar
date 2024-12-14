@@ -24,7 +24,7 @@ const TableLeaderboard = ({ users }) => {
   const topUsers = sortedUsers.slice(0, 10);
 
   return (
-    <Table aria-label="Leaderboard table">
+    <Table aria-label="Leaderboard table" className="h-[380px] sm:h-auto">
       <TableHeader columns={columns}>
         {(column) => (
           <TableColumn key={column.key} className="text-center">
