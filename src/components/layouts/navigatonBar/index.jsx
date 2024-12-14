@@ -24,11 +24,17 @@ import useAIModel from "@/hooks/useModelAI";
 import { authUserSession } from "@/libs/auth-session";
 import { signOut } from "next-auth/react";
 import Swal from "sweetalert2";
-import ModalSelect from "@/components/modalSelect";
+import { Modals } from "@/components/modals";
+import TableLeaderboard from "@/components/table";
+import { getAllUsers } from "@/libs/api-libs";
 
 const NavigationBar = ({ onChange, darkmode }) => {
   const switchAIModel = useAIModel((state) => state.switchAIModel);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { session } = authUserSession();
+
+  const [isSelectOpen, setSelectOpen] = useState(false);
+  const [isLeaderboardOpen, setLeaderboardOpen] = useState(false);
+  const [users, setUsers] = useState([]);
 
   const handleChange = (value) => {
     const selectedModel = AImodels.AI_models.find((model) => model.id == value);
@@ -39,8 +45,6 @@ const NavigationBar = ({ onChange, darkmode }) => {
   };
 
   const AIModel = useAIModel((state) => state.AIModel);
-
-  const { session } = authUserSession();
 
   const handleLogout = () => {
     Swal.fire({
@@ -58,9 +62,13 @@ const NavigationBar = ({ onChange, darkmode }) => {
     });
   };
 
-  const handleOpen = () => {
-    onOpen();
-  };
+  useEffect(() => {
+    const fetchDataUsers = async () => {
+      const response = await getAllUsers("user");
+      setUsers(response.data.users);
+    };
+    fetchDataUsers();
+  }, []);
 
   return (
     <>
@@ -100,8 +108,14 @@ const NavigationBar = ({ onChange, darkmode }) => {
                     {session?.user.email}
                   </p>
                 </DropdownItem>
-                <DropdownItem key="model" onClick={handleOpen}>
+                <DropdownItem key="model" onClick={() => setSelectOpen(true)}>
                   Select Model
+                </DropdownItem>
+                <DropdownItem
+                  key="leaderboard"
+                  onClick={() => setLeaderboardOpen(true)}
+                >
+                  Leaderboard
                 </DropdownItem>
                 <DropdownItem
                   key="theme"
@@ -128,7 +142,11 @@ const NavigationBar = ({ onChange, darkmode }) => {
           </Dropdown>
         </NavbarContent>
       </Navbar>
-      <ModalSelect isOpen={isOpen} onClose={onClose}>
+
+      <Modals.ModalSelect
+        isOpen={isSelectOpen}
+        onClose={() => setSelectOpen(false)}
+      >
         <h2>Model aktif : {AIModel}</h2>
         <Select
           placeholder="Select here"
@@ -149,7 +167,14 @@ const NavigationBar = ({ onChange, darkmode }) => {
             </SelectItem>
           ))}
         </Select>
-      </ModalSelect>
+      </Modals.ModalSelect>
+
+      <Modals.ModalLeaderboard
+        isOpen={isLeaderboardOpen}
+        onClose={() => setLeaderboardOpen(false)}
+      >
+        <TableLeaderboard users={users} />
+      </Modals.ModalLeaderboard>
     </>
   );
 };

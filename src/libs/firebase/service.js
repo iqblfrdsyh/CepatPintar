@@ -2,6 +2,7 @@ import {
   addDoc,
   collection,
   doc,
+  getDoc,
   getDocs,
   getFirestore,
   query,
@@ -29,6 +30,7 @@ export async function loginWithGoogle(data, callback) {
     if (user.length > 0) {
       const existingUser = user[0];
       data.last_study = existingUser.last_study || new Date().toISOString();
+      data.activity_points = existingUser.activity_points || 0;
 
       await updateDoc(doc(firestore, "users", existingUser.id), data);
 
@@ -45,12 +47,35 @@ export async function loginWithGoogle(data, callback) {
   }
 }
 
-export async function updateLastStudyById(id, callback) {
+export async function getAllUsers() {
+  try {
+    const usersCollection = collection(firestore, "users");
+    const snapshot = await getDocs(usersCollection);
+    const users = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    return { status: true, total: users.length, users };
+  } catch (error) {
+    console.error("Error in getAllUsers:", error);
+    throw new Error(error.message);
+  }
+}
+
+export async function updateUserActivity(id, callback) {
   try {
     const userRef = doc(firestore, "users", id);
 
-    if (id) {
+    const userSnapshot = await getDoc(userRef);
+
+    if (userSnapshot.exists()) {
+      const user = userSnapshot.data();
+
+      const currentPoints = user.activity_points || 0;
+
       const updatedData = {
+        activity_points: currentPoints + 15,
         last_study: new Date().toISOString(),
       };
 
@@ -58,14 +83,15 @@ export async function updateLastStudyById(id, callback) {
 
       callback({
         status: true,
-        message: "Last study updated successfully",
+        message: "Last study and points updated successfully",
         last_study: updatedData.last_study,
+        points: updatedData.activity_points,
       });
     } else {
-      callback({ status: false, message: "No user found with this ID" });
+      throw new Error("User not found");
     }
   } catch (error) {
-    console.error("Error in updateLastStudyById:", error);
+    console.error("Error in updateUserActivity:", error);
     callback({ status: false, error: error.message });
   }
 }

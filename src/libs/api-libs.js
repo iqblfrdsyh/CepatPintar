@@ -28,6 +28,15 @@ export async function runAI(aiModel, question, history) {
   }
 }
 
+export async function getAllUsers(endpoint) {
+  try {
+    const response = await axios.get(`${base_url}/${endpoint}`);
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function updateData(endpoint, userId) {
   try {
     const response = await axios.get(`${base_url}/${endpoint}/${userId}`);

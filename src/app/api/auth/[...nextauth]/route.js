@@ -24,6 +24,7 @@ export const authOptions = {
           email: profile.email || "",
           image: profile.picture || "",
           last_study: new Date(),
+          activity_points: 0,
           login_type: "google",
         };
 
@@ -35,6 +36,7 @@ export const authOptions = {
             token.email = result.data.email;
             token.image = result.data.image;
             token.last_study = result.data.last_study;
+            token.activity_points = result.data.activity_points;
             token.login_type = result.data.login_type;
           }
         });
@@ -50,6 +52,7 @@ export const authOptions = {
         email: token.email,
         image: token.image,
         last_study: token.last_study,
+        activity_points: token.activity_points,
         login_type: token.login_type,
       };
       return session;
