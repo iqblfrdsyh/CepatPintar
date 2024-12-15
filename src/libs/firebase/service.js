@@ -75,7 +75,7 @@ export async function updateUserActivity(id, callback) {
       const currentPoints = user.activity_points || 0;
 
       const updatedData = {
-        activity_points: currentPoints + 15,
+        activity_points: currentPoints + 5,
         last_study: new Date().toISOString(),
       };
 
