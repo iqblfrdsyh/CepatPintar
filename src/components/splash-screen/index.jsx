@@ -3,7 +3,7 @@ import React from "react";
 
 const SplashScreen = () => {
   return (
-    <div className="h-screen w-screen overflow-hidden flex justify-center items-center bg-[#fafafa] animate-pulse">
+    <div className="h-screen w-screen overflow-hidden flex justify-center items-center bg-[#fafafa] dark:bg-[#181C14] animate-pulse">
       <div className="flex items-center gap-3">
         <Image
           src={"/images/logo.svg"}
