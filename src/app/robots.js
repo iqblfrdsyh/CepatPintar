@@ -3,8 +3,8 @@ export default function robots() {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/public/",
+      disallow: ["/signin/"],
     },
-    sitemap: "https://cepat-pintar.vercel.app/sitemap.xml",
+    sitemap: "https://acme.com/sitemap.xml",
   };
 }
