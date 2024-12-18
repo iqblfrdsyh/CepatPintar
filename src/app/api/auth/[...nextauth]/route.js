@@ -31,7 +31,7 @@ export const authOptions = {
         await loginWithGoogle(data, (result) => {
           if (result.status) {
             token.id = result.data.id;
-            token.fullname = result.data.fullname;
+            token.fullname = result.data.fullname;    
             token.name = result.data.name;
             token.email = result.data.email;
             token.image = result.data.image;
